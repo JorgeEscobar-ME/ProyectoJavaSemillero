@@ -1,4 +1,3 @@
-package com.softlong;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
