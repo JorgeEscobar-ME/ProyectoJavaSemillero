@@ -58,6 +58,11 @@ public class main {
         transaccionesICRUD.actualizar(transacciones1);
         Transacciones transaccion2= (Transacciones) transaccionesICRUD.buscar("923");
         System.out.println(transaccion2.getHora());
+        List<?> listaTransacciones =transaccionesICRUD.listar();
+        Transacciones transacciones2= (Transacciones) listaTransacciones.get(0);
+        System.out.println(transacciones2.getTipoTransaccion());
+
+
 
     }
 }
