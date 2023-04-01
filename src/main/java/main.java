@@ -51,5 +51,13 @@ public class main {
         Usuario primerusuario = (Usuario) lista.get(0);
 
         System.out.println(primerusuario.getApellido());
+
+        Transacciones transacciones1 = new Transacciones(fechaActualFormateada,horaActualFormateada,"Retiro", 1000, "923", "Corriente");
+//        transaccionesICRUD.guardar(transacciones1);
+        transacciones1.setTipoTransaccion("Deposito");
+        transaccionesICRUD.actualizar(transacciones1);
+        Transacciones transaccion2= (Transacciones) transaccionesICRUD.buscar("923");
+        System.out.println(transaccion2.getHora());
+
     }
 }

@@ -124,6 +124,17 @@ public class UsuarioICRUD implements ICRUD {
 
     @Override
     public void actualizarId(Object objeto, String id) {
-
+        try (Connection conexion = DriverManager.getConnection(cadenaConexion)) {
+            Usuario usuarios = (Usuario) objeto;
+            String sentenciaSql = "UPDATE USUARIOS SET NOMBRE = '" + usuarios.getNombre() + "', APELLIDO = '"
+                    + usuarios.getApellido() + "'CEDULA = '" + usuarios.getCedula() + "' WHERE ID = " + id
+                    + ";";
+            Statement sentencia = conexion.createStatement();
+            sentencia.execute(sentenciaSql);
+        } catch (SQLException e) {
+            System.err.println("Error de conexión: " + e);
+        } catch (Exception e) {
+            System.err.println("Error " + e.getMessage());
+        }
     }
 }
