@@ -1,11 +1,15 @@
 package Repositorios;
 
+import Entidades.Usuario;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 public class UsuarioICRUD implements ICRUD{
+
     private String cadenaConexion;
     public UsuarioICRUD() {
         try {
@@ -18,6 +22,7 @@ public class UsuarioICRUD implements ICRUD{
         }
     }
     private void conectarATabla() {
+        String cadenaConexion = "jdbc:sqlite:banco.db";
         try (Connection conexion = DriverManager.getConnection(cadenaConexion)) {
             System.out.println("Conexión exitosa");
 
@@ -27,8 +32,15 @@ public class UsuarioICRUD implements ICRUD{
     }
     @Override
     public void guardar(Object objeto) {
-
-
+        String cadenaConexion = "jdbc:sqlite:banco.db";
+        try (Connection conexion = DriverManager.getConnection(cadenaConexion)){
+            Usuario usuario = (Usuario) objeto;
+            String sentenciaSQL="INSERT INTO USUARIOS (NOMBRE, APELLIDO, CEDULA) VALUES ('" + usuario.getNombre() + "', '" + usuario.getApellido() + "', '" + usuario.getCedula() + "')";
+            Statement sentencia = conexion.createStatement();
+            sentencia.execute(sentenciaSQL);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

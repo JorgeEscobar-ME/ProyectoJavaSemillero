@@ -5,12 +5,21 @@ import java.util.Date;
 
 public class Transacciones {
     private String id;
-    private Date fecha;
-    private Date hora;
+    private String fecha;
+    private String hora;
     private String tipoTransaccion;
     private double monto;
     private String idCuenta;
     private String tipoCuentaDestino;
+
+    public Transacciones(String fecha, String hora, String tipoTransaccion, double monto, String idCuenta, String tipoCuentaDestino) {
+        this.fecha = fecha;
+        this.hora = hora;
+        this.tipoTransaccion = tipoTransaccion;
+        this.monto = monto;
+        this.idCuenta = idCuenta;
+        this.tipoCuentaDestino = tipoCuentaDestino;
+    }
 
     public String getId() {
         return id;
@@ -20,19 +29,19 @@ public class Transacciones {
         this.id = id;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
-    public Date getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(Date hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 

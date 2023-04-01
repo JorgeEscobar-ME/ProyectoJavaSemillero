@@ -7,6 +7,13 @@ public class Cuentas {
     private String tipoCuenta;
     private String idUsuario;
 
+    public Cuentas(String numeroCuenta, double saldo, String tipoCuenta, String idUsuario) {
+        this.numeroCuenta = numeroCuenta;
+        this.saldo = saldo;
+        this.tipoCuenta = tipoCuenta;
+        this.idUsuario = idUsuario;
+    }
+
     public int getId() {
         return id;
     }

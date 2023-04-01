@@ -1,12 +1,17 @@
 package Repositorios;
 
+import Entidades.Transacciones;
+import Entidades.Usuario;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 
 public class TransaccionesICRUD implements ICRUD{
-    private String cadenaConexion;
+    private String cadenaConexion ="jdbc:sqlite:banco.db";
+
     public TransaccionesICRUD() {
         try {
             DriverManager.registerDriver(new org.sqlite.JDBC());
@@ -28,7 +33,16 @@ public class TransaccionesICRUD implements ICRUD{
 
     @Override
     public void guardar(Object objeto) {
-
+        String cadenaConexion = "jdbc:sqlite:banco.db";
+        try (Connection conexion = DriverManager.getConnection(cadenaConexion)){
+            Transacciones transaccion = (Transacciones) objeto;
+            String sentenciaSQL="INSERT INTO TRANSACCIONES (FECHA, HORA, TIPO_TRANSACCION, MONTO, ID_CUENTA, TIPO_CUENTA_DESTINO) VALUES " +
+                    "('" + transaccion.getFecha() + "', '" + transaccion.getHora() + "', '" + transaccion.getTipoTransaccion() + "', '"+ transaccion.getMonto() + "', '" + transaccion.getIdCuenta() + "', '" + transaccion.getTipoCuentaDestino()+ "')";
+            Statement sentencia = conexion.createStatement();
+            sentencia.execute(sentenciaSQL);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

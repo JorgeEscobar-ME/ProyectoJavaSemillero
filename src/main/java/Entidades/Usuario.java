@@ -6,6 +6,12 @@ public class Usuario {
     private String apellido;
     private String cedula;
 
+    public Usuario(String nombre, String apellido, String cedula) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.cedula = cedula;
+    }
+
     public String getId() {
         return id;
     }

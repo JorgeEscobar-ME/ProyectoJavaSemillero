@@ -13,22 +13,7 @@ public class App {
         try {
             DriverManager.registerDriver(new org.sqlite.JDBC());
             String cadenaConexion = "jdbc:sqlite:banco.db";
-            String sql = "CREATE TABLE USUARIOS(\n" +
-                    "ID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-                    "NOMBRE TEXT NOT NULL,\n" +
-                    "APELLIDO TEXT NOT NULL,\n" +
-                    "CEDULA TEXT NOT NULL UNIQUE\n" +
-                    ");\n" +
-
-                    "CREATE TABLE CUENTAS(\n" +
-                    "ID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
-                    "NUMERO_CUENTA TEXT NOT NULL UNIQUE,\n" +
-                    "SALDO REAL NOT NULL,\n" +
-                    "TIPO_CUENTA TEXT NOT NULL,\n" +
-                    "ID_USUARIO INTEGER NOT NULL,\n" +
-                    "FOREIGN KEY(ID_USUARIO) REFERENCES USUARIO(ID)\n" +
-                    ");\n" +
-
+            String sql =
                     "CREATE TABLE TRANSACCIONES(\n" +
                     "ID INTEGER PRIMARY KEY AUTOINCREMENT,\n" +
                     "FECHA TEXT NOT NULL,\n" +
