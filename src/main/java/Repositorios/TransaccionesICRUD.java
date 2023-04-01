@@ -95,7 +95,6 @@ public class TransaccionesICRUD implements ICRUD{
         }
         return null;
     }
-
     @Override
     public List<?> listar() {
         List<Transacciones> transaccionList = new ArrayList<>();
@@ -121,27 +120,18 @@ public class TransaccionesICRUD implements ICRUD{
                 }
                 return transaccionList;
             }
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            System.err.println("Error de conexión: " + e);
         }
         return null;
+
     }
 
     @Override
     public void actualizarId(Object objeto, String id) {
-        try (Connection conexion = DriverManager.getConnection(cadenaConexion)) {
-            Transacciones transacciones = (Transacciones) objeto;
-            String sentenciaSql = "UPDATE USUARIOS SET NOMBRE = " +
-                    "('" + transacciones.getFecha() + "', '" + transacciones.getHora() + "', '" + transacciones.getTipoTransaccion() + "'," +
-                    " '"+ transacciones.getMonto() +"', '"+ transacciones.getIdCuenta() +"', '"+ transacciones.getTipoCuentaDestino() +"');"+ "' WHERE id = " + id
-                    + ";";
-            Statement sentencia = conexion.createStatement();
-            sentencia.execute(sentenciaSql);
-        } catch (SQLException e) {
-            System.err.println("Error de conexión: " + e);
-        } catch (Exception e) {
-            System.err.println("Error " + e.getMessage());
-        }
+
     }
+
 }
 
