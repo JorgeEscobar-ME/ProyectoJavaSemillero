@@ -14,14 +14,21 @@ public class UsuarioService {
         repositorioUsuario = new UsuarioICRUD();
     }
 
-    public void guardarUsuarios(Map datos) {
+    public void crearUsuario(Map<String, Object> datos) throws Exception {
         String nombre = (String) datos.get("NOMBRE");
         String apellido = (String) datos.get("APELLIDO");
         String cedula = (String) datos.get("CEDULA");
 
-        Usuario nuevoUsuario = new Usuario(nombre, apellido, cedula);
-        repositorioUsuario.guardar(nuevoUsuario);
+        Usuario usuarioExistente = (Usuario) repositorioUsuario.buscar(cedula);
+
+        if (usuarioExistente != null) {
+            throw new Exception("El usuario con cedula " + cedula + " ya existe en la base de datos");
+        }
+
+        Usuario usuario = new Usuario(nombre, apellido, cedula);
+        repositorioUsuario.guardar(usuario);
     }
+
 
     public List<Usuario> listarUsuarios() {
         return (List<Usuario>) repositorioUsuario.listar();
@@ -39,7 +46,7 @@ public class UsuarioService {
         repositorioUsuario.eliminar(identificador);
     }
 
-    public void actualizarUsuarios(Map datos) {
+    public void actualizarUsuarios(int id, Map datos) {
         String nombre = (String) datos.get("NOMBRE");
         String apellido = (String) datos.get("APELLIDO");
         String cedula = (String) datos.get("CEDULA");
